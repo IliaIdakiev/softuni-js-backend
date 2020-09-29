@@ -1,0 +1,18 @@
+<a href="/">New User</a>
+<ul>
+  {{#each users}}
+  <li><a href="/user/{{@index}}">{{name}} - {{age}}</a></li>
+  {{/each}}
+</ul>
+
+<form {{#if selectedUser}} action="/user/{{selectedUserIndex}}" {{else}} action="/user" {{/if}} method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input name="name" {{#if selectedUser}} value="{{selectedUser.name}}" {{/if}}>
+  </div>
+  <div>
+    <label for="age">Age:</label>
+    <input name="age" type="number" {{#if selectedUser}} value="{{selectedUser.age}}" {{/if}}>
+  </div>
+  <button>Save</button>
+</form>
