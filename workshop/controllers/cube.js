@@ -2,14 +2,14 @@ const cubeModel = require('../models/cube');
 module.exports = {
   getCubes(req, res, next) {
     const { from, search, to } = req.query;
-    cubeModel.getAll({ name: search, from: +from, to: +to }).then(cubes => {
+    return cubeModel.getAll({ name: search, from: +from, to: +to }).then(cubes => {
       // throw new Error('ERROR!');
       res.render('index', { layout: false, cubes, from, search, to });
     }).catch(next);
   },
-  getCube(req, res) {
+  getCube(req, res, next) {
     const id = +req.params.id;
-    cubeModel.findById(id).then(cube => {
+    return cubeModel.findById(id).then(cube => {
       res.render('details', { layout: false, cube });
     }).catch(next);
   },
@@ -20,6 +20,6 @@ module.exports = {
       .catch(next);
   },
   getCreateCube(req, res) {
-    res.render('create', { layout: false });
+    res.render('createe', { layout: false });
   }
 }
