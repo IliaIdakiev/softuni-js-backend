@@ -20,6 +20,6 @@ module.exports = {
       .catch(next);
   },
   getCreateCube(_, res) {
-    res.render('createe', { layout: false });
+    res.render('create', { layout: false });
   }
 }
