@@ -19,7 +19,7 @@ module.exports = {
       .then(() => res.redirect('/'))
       .catch(next);
   },
-  getCreateCube(req, res) {
+  getCreateCube(_, res) {
     res.render('createe', { layout: false });
   }
 }
