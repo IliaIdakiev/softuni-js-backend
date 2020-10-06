@@ -1,0 +1,15 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "dependencies": {
+        "express": "^4.17.1",
+        "express-handlebars": "^3.1.0",
+        "uniqid": "^5.0.3"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.2"
+    }
+}
