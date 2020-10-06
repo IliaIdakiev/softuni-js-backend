@@ -13,4 +13,10 @@ module.exports = (app) => {
 
     app.use(express.static(staticFilePath));
 
+    app.use(function (err, req, res, next) {
+        if (err.message === 'BAD_REQUEST') {
+            res.status(400);
+            return;
+        }
+    });
 };

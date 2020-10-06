@@ -2,24 +2,35 @@ const cubeModel = require('../models/cube');
 module.exports = {
   getCubes(req, res, next) {
     const { from, search, to } = req.query;
-    return cubeModel.getAll({ name: search, from: +from, to: +to }).then(cubes => {
-      // throw new Error('ERROR!');
-      res.render('index', { layout: false, cubes, from, search, to });
-    }).catch(next);
+    let query = {};
+    if (search) { query.name = new RegExp(search, 'i'); }
+    if (from) {
+      query.difficultyLevel = { $gte: +from };
+    }
+    if (to) {
+      query.difficultyLevel = query.difficultyLevel || {};
+      query.difficultyLevel.$lte = +to;
+    }
+
+    cubeModel.find(query).populate('accessories')
+      .then(cubes => {
+        res.render('index', { cubes, from, search, to });
+      })
+      .catch(next);;
   },
   getCube(req, res, next) {
-    const id = +req.params.id;
-    return cubeModel.findById(id).then(cube => {
-      res.render('details', { layout: false, cube });
+    const id = req.params.id;
+    return cubeModel.findById(id).populate('accessories').then(cube => {
+      res.render('details', { cube });
     }).catch(next);
   },
   postCreateCube(req, res, next) {
     const { name, description, difficultyLevel, imageURL } = req.body;
-    cubeModel.insert(name, description, imageURL, +difficultyLevel)
+    cubeModel.create({ name, description, imageURL, difficultyLevel: +difficultyLevel })
       .then(() => res.redirect('/'))
       .catch(next);
   },
   getCreateCube(_, res) {
-    res.render('create', { layout: false });
+    res.render('create');
   }
 }
