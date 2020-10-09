@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>HELLO WORLD!</h1>
+  <ul id="users">
+
+  </ul>
+  <script>
+    const userUl = document.getElementById('users');
+    fetch('/api/users').then(res => res.json()).then(users => {
+      users.forEach(user => {
+        const li = document.createElement('li');
+        li.setAttribute('data-id', user.id);
+        li.textContent = user.firstName;
+
+        li.addEventListener('click', function () {
+          fetch('/api/user/' + user.id, { method: 'DELETE' })
+            .then(res => res.json())
+            .then(() => {
+
+            });
+        });
+        userUl.appendChild(li);
+      });
+    });
+  </script>
+</body>
+
+</html>
