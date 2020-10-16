@@ -1,0 +1,22 @@
+<main>
+  <h1>Attach a new accessory</h1>
+  <div class="form">
+    <h2>{{cube.name}}</h2>
+    <img class="cube" src="{{cube.imageURL}}">
+    {{#if noAvailableAccessories}}
+    <h3 class="italic">This cube has all available accessories so far or there is no available at all...
+    </h3>
+    {{else}}
+    <form action="/attach/accessory/{{cube.id}}" method="POST">
+      <label for="accessory">Accessories:</label>
+      <select id="accessory" name="accessory">
+        {{#each accessories}}
+        <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+      </select>
+      <input type="submit" value="Attach">
+    </form>
+    {{/if}}
+    <a class="btn" href="/details/{{cube.id}}">Back</a>
+  </div>
+</main>
