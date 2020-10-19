@@ -33,6 +33,7 @@ module.exports = {
         return signToken({ userId: user._id }, jwtSecret, { expiresIn: 900000 });
       })
       .then(jwtToken => {
+        if (!jwtToken) { return; }
         res.cookie(authCookieName, jwtToken, { httpOnly: true });
         res.redirect('/');
       })

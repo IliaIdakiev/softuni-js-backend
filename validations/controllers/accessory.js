@@ -1,5 +1,6 @@
 const accessoryModel = require('../models/accessory');
 const cubeModel = require('../models/cube');
+const cubeCreatorCheck = require('../utils/cube-creator-check');
 
 module.exports = {
   postCreateAccessory(req, res, next) {
@@ -26,7 +27,7 @@ module.exports = {
   getAttachAccessory(req, res, next) {
     const cubeId = req.params.id;
     Promise.all([
-      cubeModel.findById(cubeId),
+      cubeModel.findById(cubeId).then(cubeCreatorCheck(req)),
       accessoryModel.find({ cubes: { $nin: cubeId } })
     ]).then(([cube, accessories]) => {
       res.render('attach-accessory', {

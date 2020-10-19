@@ -1,4 +1,5 @@
 const cubeModel = require('../models/cube');
+const cubeCreatorCheck = require('../utils/cube-creator-check');
 
 module.exports = {
   getCubes(req, res, next) {
