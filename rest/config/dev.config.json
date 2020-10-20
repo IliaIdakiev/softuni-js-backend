@@ -1,0 +1,16 @@
+{
+  "server": {
+    "port": 3000,
+    "cors": {
+      "urls": [
+        "http://localhost:4200"
+      ],
+      "credentials": true,
+      "exposedHeaders": []
+    }
+  },
+  "database": {
+    "connectionString": "mongodb://127.0.0.1:27017",
+    "databaseName": "softuni-rest"
+  }
+}

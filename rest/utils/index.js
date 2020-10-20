@@ -1,0 +1,1 @@
+module.exports.tapLog = require('./tap-log');
