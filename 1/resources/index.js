@@ -42,7 +42,8 @@ function sendFile(res, fullFilePath) {
 }
 
 function httpHandler(req, res) {
-  const { pathname, query } = url.parse(req.url, true);
+  const { pathname, searchParams } = new URL(req.url, `http://${req.headers.host}`);
+  // let breed = searchParams.get('breed');
   const method = req.method.toUpperCase();
   if (method === 'GET') {
     if (pathname.includes(`/${config.staticFilesDir}/`)) {
